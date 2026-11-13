@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
+<title>Felipe Duarte Portfolio</title>
+<meta name="description" content="Product designer and design engineer. Mobile-first apps, interactive flows and internal tools, prototyped with Claude Code and shipped with engineers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a design spec sheet. Each case = short brief on the left, then a strip of real screens annotated with the state they show (redline vernacular). */
+:root{
+  --paper:#F2F3F0; --sheet:#FFFFFF; --ink:#16181B; --muted:#5C6168; --line:#D9DBD6;
+  --redline:#E8431A; --redline-soft:rgba(232,67,26,.10); --device:#16181B;
+  --display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"Geist",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111214; --sheet:#1A1C1F; --ink:#ECEDEA; --muted:#A1A6AD; --line:#2C2F33;
+  --redline:#FF6A3D; --redline-soft:rgba(255,106,61,.14); --device:#050506; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111214; --sheet:#1A1C1F; --ink:#ECEDEA; --muted:#A1A6AD; --line:#2C2F33;
+  --redline:#FF6A3D; --redline-soft:rgba(255,106,61,.14); --device:#050506; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+a{color:inherit;text-decoration-color:var(--redline);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--redline);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+
+/* Header */
+header{padding-block:56px 40px;border-bottom:1px solid var(--line)}
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;align-items:end}
+.hero h1{font-size:clamp(44px,7.2vw,92px);font-weight:800;letter-spacing:-.035em;line-height:.92}
+.hero h1 span{display:block;color:var(--muted);font-weight:700}
+.lede{font-size:clamp(17px,1.6vw,20px);line-height:1.5;max-width:34ch}
+.contact{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;color:var(--muted)}
+.contact b{color:var(--ink);font-weight:500;user-select:all}
+.copy{font:500 12px var(--mono);border:1px solid var(--line);background:var(--sheet);color:var(--ink);border-radius:6px;padding:3px 8px;cursor:pointer}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.facts span{font:500 12px/1 var(--mono);letter-spacing:.04em;padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:var(--sheet)}
+
+/* Index */
+.index{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-block:28px 8px;border-radius:10px;overflow:hidden}
+.index a{background:var(--sheet);padding:16px 18px;text-decoration:none;display:flex;flex-direction:column;gap:4px}
+.index a:hover .t{text-decoration:underline;text-decoration-color:var(--redline)}
+.index .t{font:700 17px/1.2 var(--display)}
+.index .k{color:var(--muted);font-size:14px}
+
+/* Case */
+.case{padding-block:64px;border-bottom:1px solid var(--line)}
+.case-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:20px 56px}
+.case-head .eyebrow{color:var(--redline);margin-bottom:12px}
+.case-head h2{font-size:clamp(30px,4vw,48px);font-weight:800;letter-spacing:-.025em;line-height:1}
+.case-head .client{margin-top:10px;color:var(--muted)}
+.brief{display:grid;gap:18px}
+.brief dl{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px 18px;margin:0}
+.brief dt{color:var(--muted);padding-top:3px}
+.brief dd{margin:0;max-width:62ch}
+.result{display:flex;gap:14px;align-items:baseline;padding:14px 16px;border-left:3px solid var(--redline);background:var(--redline-soft);border-radius:0 8px 8px 0}
+.result strong{font:800 30px/1 var(--display);letter-spacing:-.02em}
+
+/* Strip of annotated screens */
+.strip{margin-top:40px;display:flex;gap:28px;overflow-x:auto;padding-bottom:18px;scroll-snap-type:x proximity;scrollbar-width:thin}
+.shot{flex:0 0 auto;scroll-snap-align:start;display:flex;flex-direction:column;gap:12px;width:224px}
+.note{display:flex;gap:8px;align-items:flex-start;min-height:34px}
+.note i{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--redline);color:#fff;font:600 11px/20px var(--mono);font-style:normal;text-align:center}
+.note i.dot{width:9px;height:9px;margin-top:4px}
+.note span{font:500 11.5px/1.35 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.phone{background:var(--device);padding:7px;border-radius:30px;box-shadow:0 18px 40px -22px rgba(0,0,0,.45)}
+.phone .screen{border-radius:23px;overflow:hidden;aspect-ratio:9/18.6;background:#fff}
+.phone img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.cap{color:var(--muted);font-size:13.5px;line-height:1.45}
+
+.browser{flex:0 0 auto;width:min(760px,86vw);scroll-snap-align:start;display:flex;flex-direction:column;gap:12px}
+.browser .frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--sheet);box-shadow:0 18px 40px -26px rgba(0,0,0,.4)}
+.browser .bar{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.browser .bar b{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.browser img{display:block;width:100%;height:auto}
+
+/* How I work */
+.how{padding-block:64px;border-bottom:1px solid var(--line)}
+.how h2{font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-.02em}
+.how-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:28px}
+.how-grid h3{font-size:19px;font-weight:700;margin-bottom:8px}
+.how-grid p{color:var(--muted);max-width:40ch}
+.how-grid .mono{color:var(--redline);display:block;margin-bottom:10px}
+
+footer{padding-block:48px 64px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;color:var(--muted)}
+footer b{color:var(--ink);font-weight:500;user-select:all}
+
+@media (max-width:860px){
+  .hero,.case-head,.how-grid{grid-template-columns:minmax(0,1fr)}
+  .index{grid-template-columns:minmax(0,1fr)}
+  .brief dl{grid-template-columns:minmax(0,1fr);gap:2px}
+  .brief dd{margin-bottom:12px}
+  .shot{width:190px}
+  header{padding-block:36px 28px}
+  .case,.how{padding-block:44px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .shot .phone{transition:transform .25s ease}
+  .shot:hover .phone{transform:translateY(-4px)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <p class="mono" style="color:var(--redline);margin-bottom:18px">Portfolio · São Paulo, Brazil · Remote</p>
+        <h1>Felipe Duarte<span>Product designer and design engineer</span></h1>
+      </div>
+      <div>
+        <p class="lede">I take an idea to a working prototype with Claude Code, design every state of it, and ship it with engineers. Today I lead technology, inbound and creative direction at Agência Zeniti in São Paulo.</p>
+        <div class="contact">
+          <span><b id="email">felipeduartedemelo@gmail.com</b> <button class="copy" type="button" data-copy="felipeduartedemelo@gmail.com" aria-label="Copy email">Copy</button></span>
+          <span><b>+55 11 98848-2399</b></span>
+          <a href="https://www.linkedin.com/in/felipeduartedemelo/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="facts" aria-label="Highlights">
+      <span>Mobile-first apps</span><span>Every state designed</span><span>Claude Code daily</span><span>Shipped, in use</span><span>Runner, climber, swimmer</span>
+    </div>
+    <nav class="index" aria-label="Projects">
+      <a href="#base"><span class="mono" style="color:var(--muted)">Consumer app</span><span class="t">BASE member app</span><span class="k">Bookings, benefits and news for coworking members</span></a>
+      <a href="#kaspersky"><span class="mono" style="color:var(--muted)">Mobile flow</span><span class="t">Kaspersky security check</span><span class="k">9-question quiz opened by QR code at a trade fair</span></a>
+      <a href="#lello"><span class="mono" style="color:var(--muted)">Internal tool</span><span class="t">Lello sales quoting</span><span class="k">Quotes from CRM deals, sent straight to the ERP</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="case" id="base">
+    <div class="wrap">
+      <div class="case-head">
+        <div>
+          <p class="mono eyebrow">Consumer app · Mobile-first · 2026</p>
+          <h2>A members app for a coworking community</h2>
+          <p class="client">BASE Coworking &amp; Creative Space, São Paulo</p>
+        </div>
+        <div class="brief">
+          <dl>
+            <dt class="mono">Goal</dt><dd>Give members one place to book on-site experiences like massage and manicure, use partner benefits, and keep up with what happens in the space.</dd>
+            <dt class="mono">My role</dt><dd>Designed the app from scratch, from structure and flows to every screen and state. Built it myself with Claude Code, versioned on GitHub and deployed on Lovable, with an admin side for the BASE team.</dd>
+            <dt class="mono">Decisions</dt><dd>Four tabs a thumb can reach. A fair-use rule shown before the calendar, so nobody hits a wall after picking a date. An empty state that points back to booking. History with clear status chips.</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="strip" role="list" aria-label="BASE member app screens">
+        <figure class="shot" role="listitem"><div class="note"><i class="dot"></i><span>Home · spaces to book</span></div><div class="phone"><div class="screen"><img src="base1-espacos.jpg" alt="Home screen listing bookable spaces: manicure and massage, each with capacity, duration and a Reserve button" loading="lazy"></div></div></figure>
+        <figure class="shot" role="listitem"><div class="note"><i class="dot"></i><span>Booking · rule before the choice</span></div><div class="phone"><div class="screen"><img src="base6-reserva.jpg" alt="Booking sheet for a massage session showing the fair-use policy above a calendar with available dates" loading="lazy"></div></div></figure>
+        <figure class="shot" role="listitem"><div class="note"><i class="dot"></i><span>Empty state · points to action</span></div><div class="phone"><div class="screen"><img src="base4-vazio.jpg" alt="My bookings tab with no upcoming bookings and a prompt to explore spaces" loading="lazy"></div></div></figure>
+        <figure class="shot" role="listitem"><div class="note"><i class="dot"></i><span>History · done and cancelled</span></div><div class="phone"><div class="screen"><img src="base5-historico.jpg" alt="History tab listing past sessions with Completed and Cancelled status chips" loading="lazy"></div></div></figure>
+        <figure class="shot" role="listitem"><div class="note"><i class="dot"></i><span>Partner benefits</span></div><div class="phone"><div class="screen"><img src="base3-beneficios.jpg" alt="Benefits section with partner cards and a Use benefit button on each" loading="lazy"></div></div></figure>
+        <figure class="shot" role="listitem"><div class="note"><i class="dot"></i><span>Community news</span></div><div class="phone"><div class="screen"><img src="base2-noticias.jpg" alt="News carousel with the Halloween party photos and monthly events" loading="lazy"></div></div></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="case" id="kaspersky">
+    <div class="wrap">
+      <div class="case-head">
+        <div>
+          <p class="mono eyebrow">Mobile flow · Trade fair · Oct 2026</p>
+          <h2>A security check people finish on their phone</h2>
+          <p class="client">Kaspersky Brazil, Feira do Empreendedor 2026</p>
+        </div>
+        <div class="brief">
+          <dl>
+            <dt class="mono">Goal</dt><dd>Turn a booth visit into a qualified lead. Visitors scan a QR code, answer nine quick questions about their business and get a risk diagnosis.</dd>
+            <dt class="mono">My role</dt><dd>Designed and built the flow end to end: question pacing with a visible step bar, one answer per tap, a short gate form before the result, and a result screen with a risk gauge and the specific gaps found. Validation, error and offer states included.</dd>
+          </dl>
+          <div class="result"><strong>2,003</strong><span>leads in 4 days across the quiz and the awareness flow it was part of.</span></div>
+        </div>
+      </div>
+      <div class="strip" role="list" aria-label="Kaspersky quiz screens, in order">
+        <figure class="shot" role="listitem"><div class="note"><i>1</i><span>First use · one clear action</span></div><div class="phone"><div class="screen"><img src="kq1-intro.jpg" alt="Intro screen asking if your business is really protected, with a Start diagnosis button" loading="lazy"></div></div></figure>
+        <figure class="shot" role="listitem"><div class="note"><i>2</i><span>Question 1 of 9 · selected</span></div><div class="phone"><div class="screen"><img src="kq3-resposta.jpg" alt="First question about company size with one option selected and a nine-step progress bar" loading="lazy"></div></div></figure>
+        <figure class="shot" role="listitem"><div class="note"><i>3</i><span>Gate form · result is ready</span></div><div class="phone"><div class="screen"><img src="kq4-form.jpg" alt="Form saying the diagnosis is ready, asking for name, company, email and phone" loading="lazy"></div></div></figure>
+        <figure class="shot" role="listitem"><div class="note"><i>4</i><span>Result · risk and gaps</span></div><div class="phone"><div class="screen"><img src="kq6-resultado.jpg" alt="Result screen with a risk gauge pointing to high and a row of icons marking which answers were gaps" loading="lazy"></div></div></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="case" id="lello">
+    <div class="wrap">
+      <div class="case-head">
+        <div>
+          <p class="mono eyebrow">Internal tool · Web · 2026</p>
+          <h2>Quotes that go from the CRM to the ERP in one place</h2>
+          <p class="client">Lello Print, sales team</p>
+        </div>
+        <div class="brief">
+          <dl>
+            <dt class="mono">Goal</dt><dd>Let sales reps build a quote from an open CRM deal and send it to the ERP (TOTVS Protheus) without retyping anything.</dd>
+            <dt class="mono">My role</dt><dd>Designed the flow and built it with Claude Code and Lovable, working with the client's IT team through release. A step-by-step editor unlocks each section in order. Every quote shows its ERP status, and errors are written as the fix the rep needs to make.</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="strip" role="list" aria-label="Lello quoting panel screens">
+        <figure class="browser" role="listitem"><div class="note"><i class="dot"></i><span>Status per quote · error written as a fix</span></div><div class="frame"><div class="bar"><b></b><b></b><b></b></div><img src="lello1-orcamentos.jpg" alt="List of quotes with ERP status: sent with Protheus number, simulated, pending, and an error explaining which payment term to change" loading="lazy"></div><p class="cap">Client names blurred.</p></figure>
+        <figure class="browser" role="listitem"><div class="note"><i class="dot"></i><span>Editor · sections unlock in order</span></div><div class="frame"><div class="bar"><b></b><b></b><b></b></div><img src="lello2-novo.jpg" alt="New quote editor with numbered sections: branch, warehouse, client, products and header, later sections dimmed until earlier ones are done" loading="lazy"></div><p class="cap">Deal and client details blurred.</p></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="wrap">
+      <h2>How I work with AI</h2>
+      <div class="how-grid">
+        <div><span class="mono">Prototype</span><h3>Working code over long specs</h3><p>I explore directions in Claude Code and Lovable and test them on a real phone the same day. The best one becomes the product.</p></div>
+        <div><span class="mono">Systems</span><h3>Prompts that keep things on brand</h3><p>I build reusable Claude Code skills, templates and component rules so every new screen starts from the same tokens and voice.</p></div>
+        <div><span class="mono">Automation</span><h3>Workflows that run on their own</h3><p>n8n workflows and AI agents connect forms, CRM and ERP, and write reports, so the team spends time on decisions.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>Felipe Duarte · <b>felipeduartedemelo@gmail.com</b> · <b>+55 11 98848-2399</b></span>
+  <span>Certified by Anthropic in Claude API and Claude Code</span>
+</footer>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var t=btn.getAttribute('data-copy');
+    function done(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},1600)}
+    function fallback(){var el=document.getElementById('email');var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected'}
+    try{navigator.clipboard.writeText(t).then(done,fallback)}catch(e){fallback()}
+  });
+});
+</script>
+</body>
+</html>
